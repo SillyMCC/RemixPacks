@@ -38,21 +38,21 @@ jobs:
 
       - name: Create HITW ZIP
         run: |
-          rm -f BMCC-hitw.zip
+          rm -f REMIX-hitw.zip
           cd hitwPack
-          zip -r ../BMCC-hitw.zip . -x ".git/*" ".github/*"
+          zip -r ../REMIX-hitw.zip . -x ".git/*" ".github/*"
           cd ..
 
       - name: Compute SHA-1 hash and save as artifact
         run: |
-          SHA1=$(sha1sum BMCC-hitw.zip | awk '{ print $1 }')
-          echo "$SHA1" > bmcc-hitw.hash
+          SHA1=$(sha1sum REMIX-hitw.zip | awk '{ print $1 }')
+          echo "$SHA1" > REMIX-hitw.hash
 
       - name: Upload HITW ZIP to release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: hitwLatest
-          files: BMCC-hitw.zip
+          files: REMIX-hitw.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: hitw-hash
-          path: bmcc-hitw.hash
+          path: REMIX-hitw.hash
 
   update-version-and-hash:
     name: Update HITW Version and Hash
@@ -80,7 +80,7 @@ jobs:
       - name: Update HITW version and hash in root file
         run: |
           git pull origin main
-          SHA1=$(cat bmcc-hitw.hash)
+          SHA1=$(cat REMIX-hitw.hash)
           NEXT_VERSION=${{ needs.build.outputs.NEXT_VERSION }}
           EVENT_NUM=${{ needs.build.outputs.EVENT_NUM }}
           sed -i "s/^[[:space:]]*HITW:.*/    HITW: $NEXT_VERSION/" bmccEventNumber.txt

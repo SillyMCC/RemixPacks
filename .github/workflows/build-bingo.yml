@@ -38,21 +38,21 @@ jobs:
 
       - name: Create BINGO ZIP
         run: |
-          rm -f BMCC-bingo.zip
+          rm -f REMIX-bingo.zip
           cd bingoPack
-          zip -r ../BMCC-bingo.zip . -x ".git/*" ".github/*"
+          zip -r ../REMIX-bingo.zip . -x ".git/*" ".github/*"
           cd ..
 
       - name: Compute SHA-1 hash and save as artifact
         run: |
-          SHA1=$(sha1sum BMCC-bingo.zip | awk '{ print $1 }')
-          echo "$SHA1" > bmcc-bingo.hash
+          SHA1=$(sha1sum REMIX-bingo.zip | awk '{ print $1 }')
+          echo "$SHA1" > REMIX-bingo.hash
 
       - name: Upload BINGO ZIP to release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: bingoLatest
-          files: BMCC-bingo.zip
+          files: REMIX-bingo.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: bingo-hash
-          path: bmcc-bingo.hash
+          path: REMIX-bingo.hash
 
   update-version-and-hash:
     name: Update BINGO Version and Hash
@@ -80,7 +80,7 @@ jobs:
       - name: Update BINGO version and hash in root file
         run: |
           git pull origin main
-          SHA1=$(cat bmcc-bingo.hash)
+          SHA1=$(cat REMIX-bingo.hash)
           NEXT_VERSION=${{ needs.build.outputs.NEXT_VERSION }}
           EVENT_NUM=${{ needs.build.outputs.EVENT_NUM }}
           sed -i "s/^[[:space:]]*BINGO:.*/    BINGO: $NEXT_VERSION/" bmccEventNumber.txt

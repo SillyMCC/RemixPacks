@@ -38,21 +38,21 @@ jobs:
 
       - name: Create SOT ZIP
         run: |
-          rm -f BMCC-sot.zip
+          rm -f REMIX-sot.zip
           cd sotPack
-          zip -r ../BMCC-sot.zip . -x ".git/*" ".github/*"
+          zip -r ../REMIX-sot.zip . -x ".git/*" ".github/*"
           cd ..
 
       - name: Compute SHA-1 hash and save as artifact
         run: |
-          SHA1=$(sha1sum BMCC-sot.zip | awk '{ print $1 }')
-          echo "$SHA1" > bmcc-sot.hash
+          SHA1=$(sha1sum REMIX-sot.zip | awk '{ print $1 }')
+          echo "$SHA1" > REMIX-sot.hash
 
       - name: Upload SOT ZIP to release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: sotLatest
-          files: BMCC-sot.zip
+          files: REMIX-sot.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: sot-hash
-          path: bmcc-sot.hash
+          path: REMIX-sot.hash
 
   update-version-and-hash:
     name: Update SOT Version and Hash
@@ -80,7 +80,7 @@ jobs:
       - name: Update SOT version and hash in root file
         run: |
           git pull origin main
-          SHA1=$(cat bmcc-sot.hash)
+          SHA1=$(cat REMIX-sot.hash)
           NEXT_VERSION=${{ needs.build.outputs.NEXT_VERSION }}
           EVENT_NUM=${{ needs.build.outputs.EVENT_NUM }}
           sed -i "s/^[[:space:]]*SOT:.*/    SOT: $NEXT_VERSION/" bmccEventNumber.txt

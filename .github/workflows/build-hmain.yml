@@ -38,21 +38,21 @@ jobs:
 
       - name: Create HALLOWEEN MAIN ZIP
         run: |
-          rm -f BMCC-hMain.zip
+          rm -f REMIX-hMain.zip
           cd mainHalloweenPack
-          zip -r ../BMCC-hMain.zip . -x ".git/*" ".github/*"
+          zip -r ../REMIX-hMain.zip . -x ".git/*" ".github/*"
           cd ..
 
       - name: Compute SHA-1 hash and save as artifact
         run: |
-          SHA1=$(sha1sum BMCC-hMain.zip | awk '{ print $1 }')
-          echo "$SHA1" > bmcc-hmain.hash
+          SHA1=$(sha1sum REMIX-hMain.zip | awk '{ print $1 }')
+          echo "$SHA1" > REMIX-hmain.hash
 
       - name: Upload HALLOWEEN MAIN ZIP to release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: hMainLatest
-          files: BMCC-hMain.zip
+          files: REMIX-hMain.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: hmain-hash
-          path: bmcc-hmain.hash
+          path: REMIX-hmain.hash
 
   update-version-and-hash:
     name: Update HMAIN Version and Hash
@@ -80,7 +80,7 @@ jobs:
       - name: Update HMAIN version and hash in root file
         run: |
           git pull origin main
-          SHA1=$(cat bmcc-hmain.hash)
+          SHA1=$(cat REMIX-hmain.hash)
           NEXT_VERSION=${{ needs.build.outputs.NEXT_VERSION }}
           EVENT_NUM=${{ needs.build.outputs.EVENT_NUM }}
           sed -i "s/^[[:space:]]*HMAIN:.*/    HMAIN: $NEXT_VERSION/" bmccEventNumber.txt

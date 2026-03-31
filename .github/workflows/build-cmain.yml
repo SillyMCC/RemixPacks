@@ -38,21 +38,21 @@ jobs:
 
       - name: Create CHRISTMAS MAIN ZIP
         run: |
-          rm -f BMCC-cMain.zip
+          rm -f REMIX-cMain.zip
           cd mainChristmasPack
-          zip -r ../BMCC-cMain.zip . -x ".git/*" ".github/*"
+          zip -r ../REMIX-cMain.zip . -x ".git/*" ".github/*"
           cd ..
 
       - name: Compute SHA-1 hash and save as artifact
         run: |
-          SHA1=$(sha1sum BMCC-cMain.zip | awk '{ print $1 }')
-          echo "$SHA1" > bmcc-cmain.hash
+          SHA1=$(sha1sum REMIX-cMain.zip | awk '{ print $1 }')
+          echo "$SHA1" > REMIX-cmain.hash
 
       - name: Upload CHRISTMAS MAIN ZIP to release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: cMainLatest
-          files: BMCC-cMain.zip
+          files: REMIX-cMain.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cmain-hash
-          path: bmcc-cmain.hash
+          path: REMIX-cmain.hash
 
   update-version-and-hash:
     name: Update CMAIN Version and Hash
@@ -80,7 +80,7 @@ jobs:
       - name: Update CMAIN version and hash in root file
         run: |
           git pull origin main
-          SHA1=$(cat bmcc-cmain.hash)
+          SHA1=$(cat REMIX-cmain.hash)
           NEXT_VERSION=${{ needs.build.outputs.NEXT_VERSION }}
           EVENT_NUM=${{ needs.build.outputs.EVENT_NUM }}
           sed -i "s/^[[:space:]]*CMAIN:.*/    CMAIN: $NEXT_VERSION/" bmccEventNumber.txt

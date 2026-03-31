@@ -38,21 +38,21 @@ jobs:
 
       - name: Create BM ZIP
         run: |
-          rm -f BMCC-bm.zip
+          rm -f REMIX-bm.zip
           cd bmPack
-          zip -r ../BMCC-bm.zip . -x ".git/*" ".github/*"
+          zip -r ../REMIX-bm.zip . -x ".git/*" ".github/*"
           cd ..
 
       - name: Compute SHA-1 hash and save as artifact
         run: |
-          SHA1=$(sha1sum BMCC-bm.zip | awk '{ print $1 }')
-          echo "$SHA1" > bmcc-bm.hash
+          SHA1=$(sha1sum REMIX-bm.zip | awk '{ print $1 }')
+          echo "$SHA1" > REMIX-bm.hash
 
       - name: Upload BM ZIP to release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: bmLatest
-          files: BMCC-bm.zip
+          files: REMIX-bm.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: bm-hash
-          path: bmcc-bm.hash
+          path: REMIX-bm.hash
 
   update-version-and-hash:
     name: Update BM Version and Hash
@@ -80,7 +80,7 @@ jobs:
       - name: Update BM version and hash in root file
         run: |
           git pull origin main
-          SHA1=$(cat bmcc-bm.hash)
+          SHA1=$(cat REMIX-bm.hash)
           NEXT_VERSION=${{ needs.build.outputs.NEXT_VERSION }}
           EVENT_NUM=${{ needs.build.outputs.EVENT_NUM }}
           sed -i "s/^[[:space:]]*BM:.*/    BM: $NEXT_VERSION/" bmccEventNumber.txt

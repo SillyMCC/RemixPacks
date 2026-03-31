@@ -38,21 +38,21 @@ jobs:
 
       - name: Create CHITW ZIP
         run: |
-          rm -f BMCC-hitwChristmas.zip
+          rm -f REMIX-hitwChristmas.zip
           cd hitwChristmasPack
-          zip -r ../BMCC-hitwChristmas.zip . -x ".git/*" ".github/*"
+          zip -r ../REMIX-hitwChristmas.zip . -x ".git/*" ".github/*"
           cd ..
 
       - name: Compute SHA-1 hash and save as artifact
         run: |
-          SHA1=$(sha1sum BMCC-hitwChristmas.zip | awk '{ print $1 }')
-          echo "$SHA1" > bmcc-hitwChristmas.hash
+          SHA1=$(sha1sum REMIX-hitwChristmas.zip | awk '{ print $1 }')
+          echo "$SHA1" > REMIX-hitwChristmas.hash
 
       - name: Upload CHITW ZIP to release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: hitwChristmasLatest
-          files: BMCC-hitwChristmas.zip
+          files: REMIX-hitwChristmas.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: hitwChristmas-hash
-          path: bmcc-hitwChristmas.hash
+          path: REMIX-hitwChristmas.hash
 
   update-version-and-hash:
     name: Update CHITW Version and Hash
@@ -80,7 +80,7 @@ jobs:
       - name: Update CHITW version and hash in root file
         run: |
           git pull origin main
-          SHA1=$(cat bmcc-hitwChristmas.hash)
+          SHA1=$(cat REMIX-hitwChristmas.hash)
           NEXT_VERSION=${{ needs.build.outputs.NEXT_VERSION }}
           EVENT_NUM=${{ needs.build.outputs.EVENT_NUM }}
           sed -i "s/^[[:space:]]*CHITW:.*/    CHITW: $NEXT_VERSION/" bmccEventNumber.txt
