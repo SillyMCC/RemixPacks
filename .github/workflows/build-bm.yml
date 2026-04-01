@@ -6,6 +6,8 @@ on:
 concurrency:
   group: bm-pack
   cancel-in-progress: true
+permissions:
+  contents: write
 
 jobs:
   build:

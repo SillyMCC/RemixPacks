@@ -6,6 +6,8 @@ on:
 concurrency:
   group: main-pack
   cancel-in-progress: true
+permissions:
+  contents: write
 
 jobs:
   build:

@@ -6,6 +6,8 @@ on:
 concurrency:
   group: hmain-pack
   cancel-in-progress: true
+permissions:
+  contents: write
 
 jobs:
   build:
