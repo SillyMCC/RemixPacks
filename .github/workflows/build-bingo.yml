@@ -3,6 +3,10 @@ name: BINGO Pack (DONT USE)
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+
 concurrency:
   group: bingo-pack
   cancel-in-progress: true
