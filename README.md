@@ -1,4 +1,4 @@
-This repository was entirely made just to host resource packs for the MCC recreation: Backseaters Minecraft Championship (BMCC). 
+This repository was entirely made just to host resource packs for the MCC recreation: RemixMCC Minecraft Championship (BMCC). 
 
 We do not claim ownership of any of the assets included in this repository, taking assets from here is allowed however do not claim any of it as your own.
 
