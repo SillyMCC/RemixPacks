@@ -1,9 +1,1 @@
-{"parent":"minecraft:item/template_skull","overrides":[
-    {"predicate":{"custom_model_data":1},"model":"custom/entities/player/head"},
-    {"predicate":{"custom_model_data":2},"model":"custom/entities/player/right_arm"},
-    {"predicate":{"custom_model_data":3},"model":"custom/entities/player/left_arm"},
-    {"predicate":{"custom_model_data":4},"model":"custom/entities/player/torso"},
-    {"predicate":{"custom_model_data":5},"model":"custom/entities/player/right_leg"},
-    {"predicate":{"custom_model_data":6},"model":"custom/entities/player/left_leg"},
-    {"predicate":{"custom_model_data":7},"model":"custom/entities/player/slim_right"},
-    {"predicate":{"custom_model_data":8},"model":"custom/entities/player/slim_left"}]}
+{"textures":{"particle":"block/soul_sand"},"display":{"gui":{"translation":[0.0,7.0,0.0],"rotation":[0.0,0.0,0.0],"scale":[1.7,1.7,1.7]},"fixed":{"translation":[0.0,4.0,0.0],"rotation":[0.0,180.0,0.0],"scale":[1.0,1.0,1.0]},"ground":{"translation":[0.0,3.0,0.0],"rotation":[0.0,0.0,0.0],"scale":[0.5,0.5,0.5]},"thirdperson_lefthand":{"translation":[-6.0,3.0,29.5],"rotation":[70.0,180.0,0.0],"scale":[2.7,2.7,2.7]},"firstperson_lefthand":{"translation":[-6.0,3.0,29.5],"rotation":[70.0,180.0,0.0],"scale":[0.0,0.0,0.0]},"thirdperson_righthand":{"translation":[0.0,3.0,0.0],"rotation":[45.0,45.0,0.0],"scale":[0.5,0.5,0.5]}},"gui_light":"front"}
