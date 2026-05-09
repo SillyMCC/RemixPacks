@@ -19,8 +19,8 @@ Packs:
     HITW_HASH: 8954d41f97d508d084533585c2500f3dbc361ef9
 
   Bingo But Fast:
-    BINGO: 6
-    BINGO_HASH: 4bb5cdb5eec83a9cf49d8dd856aefa46ea98d6b1
+    BINGO: 7
+    BINGO_HASH: fea64a413f2ee4284179cce50a22a22b74dfb54e
 
   Main Halloween:
     HMAIN: 20
