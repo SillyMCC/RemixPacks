@@ -73,6 +73,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Pull latest main
+        run: git pull origin main
+
       - name: Download hash artifact
         uses: actions/download-artifact@v4
         with:
@@ -81,7 +84,6 @@ jobs:
 
       - name: Update SOT version and hash in root file
         run: |
-          git pull origin main
           SHA1=$(cat REMIX-csot.hash)
           NEXT_VERSION=${{ needs.build.outputs.NEXT_VERSION }}
           EVENT_NUM=${{ needs.build.outputs.EVENT_NUM }}
